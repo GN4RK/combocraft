@@ -39,7 +39,15 @@ function scalingCalculation(move, position) {
 function theoricScaling(move, position) {
     if (position < 3) {
         return 1;
-    } 
+    }
+
+    if (move.properties.includes("isGrab")) {
+        return scaling = theoricScaling(move, position-1);
+    }
+
+    if (move.properties.includes("is50%DamageScaling")) {
+        return scaling = theoricScaling(move, position-1)*(0.5);
+    }
 
     return scaling = theoricScaling(move, position-1)*(0.875);
 }

@@ -9,10 +9,10 @@ class Character
 
 class Move 
 {
-	constructor(name, damage, isGrab) {
+	constructor(name, damage, properties) {
 		this.name = name;
 		this.damage = damage;
-		this.isGrab = isGrab;
+		this.properties = properties;
 	}
 }
  
