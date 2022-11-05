@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+		<link rel="stylesheet" href="style.css" />
+        <title>Combo craft</title>
+        <script language="javascript" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.8.0/p5.js"></script>
+    </head>
+
+    <body>
+        <h1>Combo craft</h1>
+        <div class="m3">
+            <label for="character">Character</label><br />
+            <select name="character" id="character">
+                <option value="">--Please choose a character--</option>
+                <option value="filia">Filia</option>
+            </select>
+        </div>
+        <div class="m3">
+            <label for="input-list">Input list</label><br />
+            <textarea class="input-list" id="input-list" name="input-list"></textarea>
+        </div>
+
+        <div id="game"></div>
+        <div id="info"></div>
+        <div id="debug"></div>
+
+        <script
+                src="https://code.jquery.com/jquery-3.6.1.min.js"
+                integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+                crossorigin="anonymous"></script>
+        <script src="class.js"></script>
+        <script src="filia.js"></script>
+        <script src="functions.js"></script>
+    </body>
+</html>

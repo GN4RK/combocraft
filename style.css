@@ -1,0 +1,16 @@
+body {
+    background-color: #111111;
+    color : #dddddd;
+    font-family: Arial;
+    max-width: 800px;
+    margin: auto;
+    overflow: hidden;
+}
+
+.m3 {
+    margin: 15px;
+}
+
+.input-list {
+    width: 100%;
+}
