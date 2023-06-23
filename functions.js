@@ -9,6 +9,7 @@ function comboDamageCalculation(arrayCombo, ratio) {
         res += moveDamageCalculation(item, i, ratio);
         i++;
     });
+    // return Math.round(res);
     return res;
 }
 
@@ -17,7 +18,7 @@ function moveDamageCalculation(move, position, ratio) {
     scaling = scalingCalculation(move, position, ratio);
     damage = baseDamage * scaling;
     damage = damage * ratio;
-    damage = Math.floor(damage);
+    // damage = Math.round(damage);
 
     console.log(damage);
     return damage;
@@ -32,24 +33,43 @@ function scalingCalculation(move, position) {
     if ((baseDamage >= 1000) && (scalingTmp < 0.275)){
         scaling = 0.275;
     }
+
+    if (move.name == "Fenrir9" && scalingTmp < 0.34) {
+        scaling = 0.34;
+    }
+    
+    console.log(scaling);
         
     return scaling;
 }
 
 function theoricScaling(move, position) {
-    if (position < 3) {
+    if (position < 1) {
+        return 1;
+    }
+
+    if (position < 3 && !previousMoveProperty(position).includes("isGrab")) {
         return 1;
     }
 
     if (move.properties.includes("isGrab")) {
-        return scaling = theoricScaling(move, position-1);
+        return theoricScaling(move, position-1);
     }
 
     if (move.properties.includes("is50%DamageScaling")) {
-        return scaling = theoricScaling(move, position-1)*(0.5);
+        return theoricScaling(move, position-1)*(0.5);
     }
 
-    return scaling = theoricScaling(move, position-1)*(0.875);
+    scaling = theoricScaling(move, position-1)*(0.875);
+
+    return scaling;
+}
+
+function previousMoveProperty(position) {
+    if (position < 1) {
+        return [];
+    }
+    return COMBO[position-1].properties;
 }
 
 function computeInput() {
@@ -63,6 +83,8 @@ function computeInput() {
     let combo = [];
     inputs.forEach(element => combo.push(eval(character).moves[element]));
 
+    COMBO = combo;
+
     // console.log(combo);
     // console.log(comboDamageCalculation(combo, 1));
 
@@ -72,24 +94,23 @@ function computeInput() {
     
 }
 
-combo = [
-    filia.moves["jHP"],
-    filia.moves["jHK"],
-    filia.moves["sHP"],
-    filia.moves["jHP"],
-    filia.moves["jHK"],
-    filia.moves["jLK"],
-    filia.moves["jHP"],
-    filia.moves["jHK"],
-    filia.moves["cLK"],
-    filia.moves["sHP"],
-    filia.moves["jLP"],
-    filia.moves["jHP"],
-    filia.moves["jHK"],
-];
+// combo = [
+//     filia.moves["jHP"],
+//     filia.moves["jHK"],
+//     filia.moves["sHP"],
+//     filia.moves["jHP"],
+//     filia.moves["jHK"],
+//     filia.moves["jLK"],
+//     filia.moves["jHP"],
+//     filia.moves["jHK"],
+//     filia.moves["cLK"],
+//     filia.moves["sHP"],
+//     filia.moves["jLP"],
+//     filia.moves["jHP"],
+//     filia.moves["jHK"],
+// ];
 
-console.log(combo);
-console.log(comboDamageCalculation(combo, 1));
+// console.log(comboDamageCalculation(combo, 1));
 
 
 
